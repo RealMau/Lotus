@@ -1,6 +1,35 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
+from kivy.graphics import Color, Rectangle
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import Image
+
+
+
+
+class DefaultScreenBackground(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        # Set the background color
+        with self.canvas.before:
+            Color(0.5, 0.4, 0.7, 1)  # Background color
+            self.background_rect = Rectangle(pos=self.pos, size=self.size)
+
+        # Create and add the image
+        self.image = Image(
+            source='C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png',
+            size_hint=(1, 1),
+            pos_hint={'center_x': 0.5, 'center_y': 0.5}
+        )
+        self.add_widget(self.image)
+
+    def on_size(self, instance, value):
+        self.background_rect.size = value
+
+    def on_pos(self, instance, value):
+        self.background_rect.pos = value
 
 KV = '''
 ScreenManager:
@@ -10,27 +39,17 @@ ScreenManager:
 <MainScreen>:
     name: 'main'
 
-    #background settings
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    # Include the DefaultScreenBackground as a child
+    DefaultScreenBackground:
 
-    #here we have the Logo settings
+    # Here we have the Logo settings
     Image: 
         source: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/logo_instantes.png'
         halign: 'center'
         size_hint: None, None
         size: dp(300), dp(72)
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
 
     #adding buttons
 
@@ -87,18 +106,7 @@ ScreenManager:
 
 <AgendaScreen>:
     name: 'agenda'
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    DefaultScreenBackground:
     Button:
         size_hint: None, None
         size: dp(60), dp(60)  # Adjust the size as needed
@@ -108,18 +116,7 @@ ScreenManager:
 
 <CajaScreen>:
     name: 'caja'
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    DefaultScreenBackground:
     Button:
         size_hint: None, None
         size: dp(60), dp(60)  # Adjust the size as needed
@@ -129,18 +126,7 @@ ScreenManager:
 
 <VouchersScreen>:
     name: 'vouchers'
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    DefaultScreenBackground:
     Button:
         size_hint: None, None
         size: dp(60), dp(60)  # Adjust the size as needed
@@ -150,18 +136,7 @@ ScreenManager:
 
 <CursosScreen>:
     name: 'cursos'
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    DefaultScreenBackground:
     Button:
         size_hint: None, None
         size: dp(60), dp(60)  # Adjust the size as needed
@@ -171,18 +146,7 @@ ScreenManager:
 
 <FichasScreen>:
     name: 'fichas'
-    BoxLayout:
-        orientation: 'vertical'
-        canvas.before:
-            Color:
-                rgba: 0.5, 0.4, 0.7, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-            #Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "C:/Users/mauro/Documents/GitHub/Lotus/assets/white_gradient.png"
+    DefaultScreenBackground:
     Button:
         size_hint: None, None
         size: dp(60), dp(60)  # Adjust the size as needed
