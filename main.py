@@ -1,13 +1,15 @@
+from kivy.metrics import dp
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
+from kivy.properties import StringProperty
 
 
-
-
+#default "backbutton" for all pages
 class DefaultScreenBackground(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -31,6 +33,26 @@ class DefaultScreenBackground(BoxLayout):
     def on_pos(self, instance, value):
         self.background_rect.pos = value
 
+
+
+
+class BackButton(ButtonBehavior, Image):
+    destination_screen = StringProperty()
+
+    def __init__(self, destination_screen='', **kwargs):
+        super().__init__(**kwargs)
+        self.destination_screen = destination_screen
+        self.source = 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
+        self.size_hint = (None, None)
+        self.size = (dp(40), dp(40))
+        self.pos_hint = {'left': 1.0, 'top': 1.0}
+
+    def on_release(self):
+        if self.destination_screen:
+            app = MDApp.get_running_app()
+            app.switch_screen(self.destination_screen)
+
+
 KV = '''
 ScreenManager:
     MainScreen:
@@ -51,9 +73,7 @@ ScreenManager:
         pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
 
-    #adding buttons
-
-    #Agenda
+     #Agenda
     MDRectangleFlatButton:
         text: "Agenda"
         theme_text_color: "Custom"
@@ -107,52 +127,32 @@ ScreenManager:
 <AgendaScreen>:
     name: 'agenda'
     DefaultScreenBackground:
-    Button:
-        size_hint: None, None
-        size: dp(60), dp(60)  # Adjust the size as needed
-        pos_hint: {'top': 1.0, 'left': 1.0}
-        background_normal: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
-        on_release: app.switch_screen('main')
+    BackButton:
+        destination_screen: 'main'
 
 <CajaScreen>:
     name: 'caja'
     DefaultScreenBackground:
-    Button:
-        size_hint: None, None
-        size: dp(60), dp(60)  # Adjust the size as needed
-        pos_hint: {'top': 1.0, 'left': 1.0}
-        background_normal: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
-        on_release: app.switch_screen('main')
+    BackButton:
+        destination_screen: 'main'
 
 <VouchersScreen>:
     name: 'vouchers'
     DefaultScreenBackground:
-    Button:
-        size_hint: None, None
-        size: dp(60), dp(60)  # Adjust the size as needed
-        pos_hint: {'top': 1.0, 'left': 1.0}
-        background_normal: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
-        on_release: app.switch_screen('main')
+    BackButton:
+        destination_screen: 'main'
 
 <CursosScreen>:
     name: 'cursos'
     DefaultScreenBackground:
-    Button:
-        size_hint: None, None
-        size: dp(60), dp(60)  # Adjust the size as needed
-        pos_hint: {'top': 1.0, 'left': 1.0}
-        background_normal: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
-        on_release: app.switch_screen('main')
+    BackButton:
+        destination_screen: 'main'
 
 <FichasScreen>:
     name: 'fichas'
     DefaultScreenBackground:
-    Button:
-        size_hint: None, None
-        size: dp(60), dp(60)  # Adjust the size as needed
-        pos_hint: {'top': 1.0, 'left': 1.0}
-        background_normal: 'C:/Users/mauro/Documents/GitHub/Lotus/assets/left_arrow.png'
-        on_release: app.switch_screen('main')
+    BackButton:
+        destination_screen: 'main'
 
 '''
 
