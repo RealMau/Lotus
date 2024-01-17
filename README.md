@@ -1,6 +1,6 @@
 # Lotus
 
-# To do:
+# Tareas:
   - arreglar el gradient
   - aprender mas oop
   - montar el server
